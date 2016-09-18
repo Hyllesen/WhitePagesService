@@ -22,7 +22,12 @@ public class WhitePagesWebServiceFromWSDL {
          phoneBook = new ArrayList<Person>();
     }    
     
-    public java.lang.String addPerson(org.netbeans.j2ee.wsdl.whitepages.java.whitepageswsdl.Person person) {
+    public java.lang.String addPerson(org.netbeans.j2ee.wsdl.whitepages.java.whitepageswsdl.Person person) throws Exception {
+        for(Person personInBook : phoneBook) {
+            if(personInBook.getFirstName().equals(person.getFirstName()) && (personInBook.getLastName().equals(person.getLastName()))) {
+                throw new Exception();
+            }
+        }
         phoneBook.add(person);
         return "done";
     }
