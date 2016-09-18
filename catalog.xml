@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/mogens/Documents/NetBeansProjects/WhitePages/src/java/whitepagesWSDL.wsdl" uri="src/conf/xml-resources/web-services/WhitePagesWebServiceFromWSDL/wsdl/whitepagesWSDL.wsdl"/>
+</catalog>
