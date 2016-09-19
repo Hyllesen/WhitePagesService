@@ -5,8 +5,11 @@
  */
 package ws.dtu.dk;
 
+import java.util.ArrayList;
 import javax.jws.WebService;
 import org.netbeans.j2ee.wsdl.whitepages.java.whitepageswsdl.Fault;
+import org.netbeans.j2ee.wsdl.whitepages.java.whitepageswsdl.FaultType;
+import org.netbeans.j2ee.wsdl.whitepages.java.whitepageswsdl.Person;
 
 /**
  *
@@ -15,14 +18,23 @@ import org.netbeans.j2ee.wsdl.whitepages.java.whitepageswsdl.Fault;
 @WebService(serviceName = "whitepagesWSDLService", portName = "whitepagesWSDLPortTypeBindingPort", endpointInterface = "org.netbeans.j2ee.wsdl.whitepages.java.whitepageswsdl.WhitepagesWSDLPortType", targetNamespace = "http://j2ee.netbeans.org/wsdl/WhitePages/java/whitepagesWSDL", wsdlLocation = "WEB-INF/wsdl/WhitePagesServiceFromWSDL/whitepagesWSDL.wsdl")
 public class WhitePagesServiceFromWSDL {
 
+    ArrayList<Person> phoneBook;
     public java.lang.String addPerson(org.netbeans.j2ee.wsdl.whitepages.java.whitepageswsdl.Person person) throws Fault {
-        //TODO implement this method
-        throw new UnsupportedOperationException("Not implemented yet.");
+        for(Person personInBook : phoneBook) {
+            if(personInBook.getFirstName().equals(person.getFirstName()) && (personInBook.getLastName().equals(person.getLastName()))) {
+                FaultType faultInfo = new FaultType();
+                faultInfo.setPerson(person);
+                Fault fault = new Fault("Person already exists", faultInfo);
+                throw fault;
+            }
+        }
+        phoneBook.add(person);
+        return "done";
     }
 
-    public org.netbeans.j2ee.wsdl.whitepages.java.whitepageswsdl.Personarray findPerson(org.netbeans.j2ee.wsdl.whitepages.java.whitepageswsdl.Person person) {
-        //TODO implement this method
-        throw new UnsupportedOperationException("Not implemented yet.");
+    public WhitePagesServiceFromWSDL() {
+        phoneBook = new ArrayList<Person>();
     }
+    
     
 }

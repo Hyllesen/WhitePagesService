@@ -30,6 +30,13 @@
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:element name="faultElement" type="tns:faultType"></xsd:element>
+            <xsd:element name="personarray">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="person" type="tns:person" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
         </xsd:schema>
     </types>
     <message name="whitepagesWSDLOperationRequest">
@@ -41,11 +48,21 @@
     <message name="fault">
         <part name="wpfault" element="tns:faultElement"/>
     </message>
+    <message name="whitepagesWSDLOperationRequest1">
+        <part name="person" element="tns:request"/>
+    </message>
+    <message name="whitepagesWSDLOperationResponse1">
+        <part name="personarray" element="tns:personarray"/>
+    </message>
     <portType name="whitepagesWSDLPortType">
         <operation name="addPerson">
             <input name="input1" message="tns:whitepagesWSDLOperationRequest"/>
             <output name="output1" message="tns:whitepagesWSDLOperationResponse"/>
             <fault name="wpfault" message="tns:fault"/>
+        </operation>
+        <operation name="findPerson">
+            <input name="input2" message="tns:whitepagesWSDLOperationRequest1"/>
+            <output name="output2" message="tns:whitepagesWSDLOperationResponse1"/>
         </operation>
     </portType>
     <binding name="whitepagesWSDLPortTypeBinding" type="tns:whitepagesWSDLPortType">
@@ -62,12 +79,18 @@
                 <soap:fault name="wpfault" use="literal"/>
             </fault>
         </operation>
+        <operation name="findPerson">
+            <soap:operation/>
+            <input name="input2">
+                <soap:body use="literal"/>
+            </input>
+            <output name="output2">
+                <soap:body use="literal"/>
+            </output>
+        </operation>
     </binding>
     <service name="whitepagesWSDLService">
         <port name="whitepagesWSDLPortTypeBindingPort" binding="tns:whitepagesWSDLPortTypeBinding">
-            <soap:address location="http://localhost:${HttpDefaultPort}/service"/>
-        </port>
-        <port name="whitepagesWSDLPortTypeBindingPort1" binding="tns:whitepagesWSDLPortTypeBinding">
             <soap:address location="http://localhost:${HttpDefaultPort}/service"/>
         </port>
     </service>
