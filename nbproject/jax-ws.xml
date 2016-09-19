@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
-    <service name="WhitePagesWebServiceFromWSDL">
-      <implementation-class>ws.dtu.dk.WhitePagesWebServiceFromWSDL</implementation-class>
+    <service name="WhitePagesServiceFromWSDL">
+      <implementation-class>ws.dtu.dk.WhitePagesServiceFromWSDL</implementation-class>
       <wsdl-url>file:/C:/Users/mogens/Documents/NetBeansProjects/WhitePages/src/java/whitepagesWSDL.wsdl</wsdl-url>
       <local-wsdl-file>whitepagesWSDL.wsdl</local-wsdl-file>
       <service-name>whitepagesWSDLService</service-name>
